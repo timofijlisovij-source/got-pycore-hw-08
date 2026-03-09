@@ -178,11 +178,16 @@ def add_contact(args: list[str], book: AddressBook) -> str:
     if record is None:
         record = Record(name)
         book.add_record(record)
-        return "Contact added."
+        message = "Contact added."
 
+    else:
+
+        message = "Phone number added"
+    
     if phone:
         record.add_phone(phone)
-        return "Phone number added"
+    
+    return message
 
 
 @input_error
@@ -262,7 +267,7 @@ def main():
 
         user_input = input("Enter a command: ")
 
-        command, args = parse_input(user_input)
+        command, *args = parse_input(user_input)
 
         if command in ["close", "exit"]:
             save_data(book)
@@ -284,10 +289,10 @@ def main():
         elif command == "all":
             print(show_all(book))
 
-        elif command == "add-birthday":
+        elif command == "add_birthday":
             print(add_birthday(args, book))
 
-        elif command == "show-birthday":
+        elif command == "show_birthday":
             print(show_birthday(args, book))
 
         elif command == "birthdays":
