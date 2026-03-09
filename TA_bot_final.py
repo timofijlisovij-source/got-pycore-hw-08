@@ -21,7 +21,10 @@ def input_error(func: Callable) -> Callable:
     def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except ValueError:
+        except ValueError as e:
+            error_message = str(e)
+            if error_message:
+                return error_message
             return "Give me name and phone please."
         except KeyError:
             return "Contact not found."
